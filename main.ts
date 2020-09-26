@@ -3,6 +3,7 @@ function Call_Variabels () {
     High_Temp = 72
 }
 function ShowDatao_Screen () {
+    let Humidity = 0
     basic.showString("\"Temperature\"")
     basic.showNumber(Math.round(airtemp))
     basic.showString("\"Humidity\"")
@@ -15,29 +16,26 @@ function GetTempHumidity () {
     DHTtype.DHT22,
     DigitalPin.P0,
     true,
-    true,
+    false,
     true
     )
     basic.pause(1000)
     airtemp = dht11_dht22.readData(dataType.temperature)
     TempF = airtemp * (9 / 5)
     airtemp = TempF + 32
-    basic.showString("\"My Garden Temperature is:\"" + Math.round(TempF))
     basic.pause(2000)
     Get_Temp_Humidity_Data = dht11_dht22.readData(dataType.humidity)
-    basic.showString("\"My Garden Humidity is:\"" + Math.round(Humidity))
     basic.pause(2000)
 }
 function Control_LED () {
     if (airtemp > High_Temp) {
         strip.showColor(neopixel.colors(NeoPixelColors.Red))
     } else {
-        strip.showColor(neopixel.colors(NeoPixelColors.Red))
+        strip.showColor(neopixel.colors(NeoPixelColors.Purple))
     }
 }
 let Get_Temp_Humidity_Data = 0
 let TempF = 0
-let Humidity = 0
 let airtemp = 0
 let High_Temp = 0
 let strip: neopixel.Strip = null
